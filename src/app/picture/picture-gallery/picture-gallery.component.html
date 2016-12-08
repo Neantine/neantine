@@ -1,0 +1,63 @@
+<md-toolbar class="Menubar">
+
+  <img src='http://img4.hostingpics.net/pics/662002androidchrome192x192burned.png'>
+  <div class="titlew" >ictu'r Gallery</div>
+
+  <div class='TitlePos'>
+    <a href="/#/index">
+      <button md-button class="ButtonStyle">
+        Home
+      </button>
+    </a>
+  </div>
+
+  <div class="ButtonPos">
+    <a routerLink ="/#/gallery" routerLinkActive="active">
+      <button md-button  class="ButtonStyle">
+        Gallery
+      </button>
+    </a>
+  </div>
+
+  <div class="ButtonPos">
+    <a routerLink="/#/upload" routerLinkActive="active">
+      <button md-button color="primary" class="ButtonStyle">
+        Upload
+      </button>
+    </a>
+  </div>
+
+  <div class="ButtonPos">
+    <a href ="/#/login">
+      <button md-button color="primary" class="ButtonStyle">
+        Login
+      </button>
+    </a>
+  </div>
+
+</md-toolbar>
+
+
+<video autoplay loop id="video-background" muted class="VideoStyle">
+  <source src="https://vimeo-hp-videos.global.ssl.fastly.net/3/3.mp4" type="video/mp4">
+</video>
+
+
+
+<div class="gallery-block">
+  <div class="gallery" >
+    <a href="" class="gallery__item" *ngFor="let pictur of picturList">
+      <img class="gallery__item__image" [src]="pictur.url | picturUrlSanitizer" [alt]="pictur.title">
+      <div class="title">{{pictur.title}}</div>
+      <!--<button md-raised-button color="warn" class="ButtonStyle">-->
+        <!--DELETE-->
+      <!--</button>-->
+      <!--<button md-raised-button color="primary" class="ButtonStyle">-->
+        <!--Change Title-->
+      <!--</button>-->
+    </a>
+
+  </div>
+
+</div>
+

@@ -1,0 +1,126 @@
+From f292fcdcaf29cbc3ae41c4c4f8f078ca9b9ed725 Mon Sep 17 00:00:00 2001
+From: Younes JAAIDI <yjaaidi@gmail.com>
+Date: Wed, 28 Sep 2016 00:16:55 +0200
+Subject: [PATCH] Livereload.
+
+---
+ config/webpack.dev.js        |  5 ++++-
+ package.json                 |  6 +++---
+ src/backend/config/config.js |  6 +++---
+ src/index.html               | 16 +++++++---------
+ 4 files changed, 17 insertions(+), 16 deletions(-)
+
+diff --git a/config/webpack.dev.js b/config/webpack.dev.js
+index 38bcee4..d559795 100644
+--- a/config/webpack.dev.js
++++ b/config/webpack.dev.js
+@@ -10,6 +10,7 @@ const commonConfig = require('./webpack.common.js'); // the settings that are co
+  * Webpack Plugins
+  */
+ const DefinePlugin = require('webpack/lib/DefinePlugin');
++const LiveReloadPlugin = require('webpack-livereload-plugin');
+ const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin');
+ 
+ /**
+@@ -125,7 +126,9 @@ module.exports = function(options) {
+          *
+          * See: https://github.com/webpack/webpack/commit/a04ffb928365b19feb75087c63f13cadfc08e1eb
+          */
+-        new NamedModulesPlugin(),
++      new NamedModulesPlugin(),
++
++      new LiveReloadPlugin()
+ 
+     ],
+ 
+diff --git a/package.json b/package.json
+index d06da3d..e36e601 100644
+--- a/package.json
++++ b/package.json
+@@ -39,13 +39,13 @@
+     "preversion": "npm test",
+     "protractor": "protractor",
+     "rimraf": "rimraf",
++    "server:dev": "nodemon -w src/backend src/backend/app.js",
+     "server:dev:hmr": "npm run server:dev -- --inline --hot",
+-    "server:dev": "webpack-dev-server --config config/webpack.dev.js --progress --profile --watch --content-base src/",
+-    "server:dev-backend": "nodemon src/backend/app.js",
++    "server:dev-webpack": "webpack-dev-server --config config/webpack.dev.js --progress --profile --watch --content-base src/",
+     "server:prod": "node src/backend/app.js",
+     "server": "npm run server:dev",
+     "start:hmr": "npm run server:dev:hmr",
+-    "start": "npm run server:dev & npm run server:dev-backend",
++    "start": "npm run server:dev & npm run watch:dev",
+     "test": "karma start",
+     "tslint": "tslint",
+     "typedoc": "typedoc",
+diff --git a/src/backend/config/config.js b/src/backend/config/config.js
+index d468959..4ee6af8 100644
+--- a/src/backend/config/config.js
++++ b/src/backend/config/config.js
+@@ -8,7 +8,7 @@ var config = {
+     app: {
+       name: 'backend'
+     },
+-    port: process.env.PORT || 3001,
++    port: process.env.PORT || 3000,
+     db:  'mongodb://localhost/backend-development'
+   },
+ 
+@@ -17,7 +17,7 @@ var config = {
+     app: {
+       name: 'backend'
+     },
+-    port: process.env.PORT || 3001,
++    port: process.env.PORT || 3000,
+     db:  'mongodb://localhost/backend-test'
+   },
+ 
+@@ -26,7 +26,7 @@ var config = {
+     app: {
+       name: 'backend'
+     },
+-    port: process.env.PORT || 3001,
++    port: process.env.PORT || 3000,
+     db: process.env.MONGODB_URL || 'mongodb://localhost/backend-production'
+   }
+ };
+diff --git a/src/index.html b/src/index.html
+index 28d912f..c60bb90 100644
+--- a/src/index.html
++++ b/src/index.html
+@@ -17,7 +17,6 @@
+   <!-- base url -->
+   <base href="<%= webpackConfig.metadata.baseUrl %>">
+ 
+-
+ </head>
+ 
+ <body>
+@@ -26,16 +25,15 @@
+     Loading...
+   </app>
+ 
+-  <!-- Google Analytics: change UA-71073175-1 to be your site's ID -->
+-  <script>
+-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
++  <% webpackConfig.metadata.DEV %>
+ 
+-    ga('create', 'UA-71073175-1', 'auto');
+-    ga('send', 'pageview');
++  <% if (webpackConfig.metadata.DEV !== 'production') { %>
++  <script>
++    var scriptElement = document.createElement('script');
++    scriptElement.setAttribute('src', 'http://' + document.domain + ':35729/livereload.js');
++    document.head.appendChild(scriptElement);
+   </script>
++  <% } %>
+ 
+   <% if (webpackConfig.metadata.isDevServer && webpackConfig.metadata.HMR !== true) { %>
+   <!-- Webpack Dev Server reload -->
+-- 
+2.8.1
+

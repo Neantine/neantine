@@ -1,0 +1,90 @@
+<md-toolbar class="Menubar">
+
+  <img src='http://img4.hostingpics.net/pics/662002androidchrome192x192burned.png'>
+  <div class="titlew" >ictu'r Gallery</div>
+
+  <div class='TitlePos'>
+    <a href="/#/index">
+      <button md-button class="ButtonStyle">
+        Home
+      </button>
+    </a>
+  </div>
+
+  <div class="ButtonPos">
+    <a href="/#/gallery">
+      <button md-button  class="ButtonStyle">
+        Gallery
+      </button>
+    </a>
+  </div>
+
+  <div class="ButtonPos">
+    <a href="/#/pictures">
+      <button md-button color="primary" class="ButtonStyle">
+        Upload
+      </button>
+    </a>
+  </div>
+
+  <div class="ButtonPos">
+    <a href ="/#/login">
+      <button md-button color="primary" class="ButtonStyle">
+        Login
+      </button>
+    </a>
+  </div>
+
+</md-toolbar>
+
+<video autoplay loop id="video-background" muted class="VideoStyle">
+  <source src="https://vimeo-hp-videos.global.ssl.fastly.net/4/4.mp4" type="video/mp4">
+</video>
+
+
+<div class='box'>
+
+
+  <form name="form" (ngSubmit)="f.form.valid && createAccount()" #f="ngForm" novalidate>
+    <div class="form-group" >
+
+      <label for="pc-login">Username</label>
+      <input id="pc-login" name="pc-login" [(ngModel)]="account.login" #login="ngModel"  placeholder="Login" required />
+
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+      <label for="password">Password</label>
+      <input id="password" style=" width: 350px;" type="password" class="form-control password" name="password" [(ngModel)]="account.password" #password="ngModel" placeholder="password" required />
+
+    </div>
+    <div class="form-group">
+      <button id="pc-create-account">Create</button>
+
+    </div>
+    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+  </form>
+
+  <!--
+  <input class="login"
+    style=" width: 350px;"
+    type="text"
+    name="title"
+    placeholder="Login"
+    >
+
+    <input class="password"
+      style=" width: 350px;"
+      type="text"
+      name="title"
+      placeholder="password"
+      >
+
+  <button md-raised-button  class="pos ButtonStyle">
+    Login
+  </button>
+  <button md-raised-button  class="pos ButtonStyle">
+    Create
+  </button>-->
+
+
+</div>
