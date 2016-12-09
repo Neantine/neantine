@@ -7,8 +7,8 @@ import { User } from '../../user/user';
 
 @Component({
   selector: 'login-app',
-  styles  : [ require('./picture-login.component.css') ] ,
-  template: require('./picture-login.component.html')
+  styles  : [ require('./login.component.css') ] ,
+  template: require('./login.component.html')
 })
 
 

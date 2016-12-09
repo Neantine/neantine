@@ -5,8 +5,8 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'login-app',
-  styles  : [ require('./picture-account.component.css') ] ,
-  template: require('./picture-account.component.html')
+  styles  : [ require('./account.component.css') ] ,
+  template: require('./account.component.html')
 })
 export class PictureAccountComponent implements OnInit {
   model: any = {};
@@ -25,6 +25,6 @@ export class PictureAccountComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    console.log('byebye picture-account component');
+    console.log('byebye account component');
   }
 }

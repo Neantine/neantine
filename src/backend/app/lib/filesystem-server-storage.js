@@ -37,56 +37,8 @@ class ServerStorage {
   }
 
 
-  savePicture(bodyReqTitle, bodyReqPictureData) {
-
-    return new Promise((resolve, reject) => {
-
-      //Create base64 decoded buffer
-      let picData = bodyReqPictureData.replace(/^data:image\/\w+;base64,/, "");
-      let decodedPicData = new Buffer(picData, 'base64');
-
-      let uniqueID = shortid.generate();
-      let generatedFileName = bodyReqTitle + '' + uniqueID + ".jpg";
-
-      let fileName = this.picturesPath + '/' + generatedFileName;
-      let filePath = path.join(__dirname, fileName);
-
-      console.log("write file: ", filePath);
-
-      createDir(filePath);
-      //this.picturesPath = storePath;
-
-      fs.writeFile(filePath, decodedPicData, 'base64', (err) => {
-
-        if (err) {
-          generatedFileName = null;
-          console.log("write error: ", err);
-          reject(err);
-        }
-        else {
-          resolve({
-            id: generatedFileName
-          });
-        }
-      })
-    })
-
-  }
 
 
-  getPicture(fileName) {
-
-    return new Promise((resolve, reject) => {
-      fs.readFile(this.picturesPath + '/' + fileName, (err, data) => {
-        if (err) {
-          reject(err);
-        }
-        else {
-          resolve(data);
-        }
-      })
-    })
-  }
 
 
   getUrl(fileName)

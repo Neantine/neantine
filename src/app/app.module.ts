@@ -8,7 +8,7 @@ import { ENV_PROVIDERS } from './environment';
 import { ROUTES } from './app.routes';
 import { App } from './app.component';
 import { CommonModule } from "./common.module";
-import { PictureModule } from "./picture/picture.module";
+import { PictureModule } from "./picture/neantine.module";
 import { BrowserModule } from "@angular/platform-browser";
 
 /**

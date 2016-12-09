@@ -5,8 +5,8 @@ import { UserStore } from '../../user/user-store';
 
 @Component({
   selector: 'home-app',
-  styles  : [ require('./picture-home.component.css') ],
-  template: require('./picture-home.component.html')
+  styles  : [ require('./home.component.css') ],
+  template: require('./home.component.html')
 })
 
 export class HomeComponent implements OnInit {

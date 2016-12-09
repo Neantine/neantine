@@ -13,10 +13,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 
 import { PictureModule }
-  from '../../../app/picture/picture.module';
+  from '../../../app/picture/neantine.module';
 
 import { PictureAccountComponent }
-  from '../../../app/picture/picture-account/picture-account.component';
+  from '../../../app/picture/account/account.component';
 
 
 

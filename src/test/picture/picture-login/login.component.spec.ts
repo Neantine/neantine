@@ -9,12 +9,12 @@ import {
 import { Router ,ActivatedRoute} from '@angular/router';
 
 import { LoginComponent }
-  from '../../../app/picture/picture-login/picture-login.component';
+  from '../../../app/picture/login/login.component';
 
 import {
   PictureModule
 }
-  from '../../../app/picture/picture.module';
+  from '../../../app/picture/neantine.module';
 
 import {
   AuthenticationStore
